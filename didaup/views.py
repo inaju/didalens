@@ -407,10 +407,11 @@ def thank_you(request):
 
 def failed_goal_list(request):
     users= CustomUser.objects.all()
-    
+    users_to_send=[]
     for current_user in users:
         j=1
         date_list=[]
+        details_list_internal=[]
         
         show_goal_user= GoalList.objects.filter(user=current_user)
         show_date_user=GoalModel.objects.filter(user=current_user)
@@ -424,60 +425,69 @@ def failed_goal_list(request):
         for date in date_list[-3:]:
             if str(date) != datetime.now().date().strftime("%Y-%m-%d"):
                 print(current_user,date , datetime.now().date().strftime("%Y-%m-%d"))
-
+                
                 while j < 4:
                     
                     details_list=GoalList.objects.filter(user=current_user)[j-1:j].get()
+
+                    if details_list not in details_list_internal:
+                        details_list_internal.append(details_list)
                     
                     b=GoalModel(user=current_user, datetogoal=details_list, is_true=False)
                     b.save()
-                    print('saved for ',current_user)
+                    print('saved for ',current_user,details_list)
                     j += 1
+                    if j == 4:
 
-                show_goal_user= GoalList.objects.filter(user=current_user)
-                show_date_user=GoalModel.objects.filter(user=current_user)
-                partners_user=AccountabilityPartner.objects.filter(user=current_user)
-
-
-                email_list=[]
-                for emails in partners_user:
-                    email_list.append(emails)
+                        show_goal_user= GoalList.objects.filter(user=current_user)
+                        show_date_user=GoalModel.objects.filter(user=current_user)
+                        partners_user=AccountabilityPartner.objects.filter(user=current_user)
 
 
-                new_comb_list=[]
-                comb_list=[]
-                
-                try:
-                    
-                    for goal in show_date_user:
-                        goal=[str(goal.datetogoal), goal.is_true, goal.time.strftime("%H:%M:%S")]
-                        comb_list.append(goal)
-
-                    for list in comb_list[-3:]:
-                        new_comb_list.append(list)
-                    now = datetime.now()
+                        email_list=[]
+                        for emails in partners_user:
+                            email_list.append(emails)
 
 
+                        new_comb_list=[]
+                        comb_list=[]
+                        
+                        try:
+                            
+                            for goal in show_date_user:
+                                goal=[str(goal.datetogoal), goal.is_true, goal.time.strftime("%H:%M:%S")]
+                                comb_list.append(goal)
 
-                    subject = str(current_user) + ' needs your help, please check up'
-                    html_message = render_to_string('help_mail_template.html', 
-                    context={'goal_one':new_comb_list[0][0],'bool_one':new_comb_list[0][1], 'time_one':new_comb_list[0][2],
-                            'goal_two':new_comb_list[1][0],'bool_two':new_comb_list[1][1], 'time_two':new_comb_list[1][2],
-                            'goal_three':new_comb_list[2][0],'bool_three':new_comb_list[2][1], 'time_three':new_comb_list[2][2],
-                            'date_now':now, 'user':current_user })
+                            for list in comb_list[-3:]:
+                                new_comb_list.append(list)
+                            now = datetime.now()
 
-                    plain_message = strip_tags(html_message)
-                    from_email = 'mitchelinajuo@gmail.com'
-                    to = str(email_list[0])
-                    to_email = str(email_list[0])
-                    print(to)
-                    print(type(to))
 
-                    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-                    mail.send_mail(subject, plain_message, from_email, [str('mitchelinaju@yahoo.com')], html_message=html_message)
-                    mail.send_mail(subject, plain_message, from_email, [str('mitchelballzz@gmail.com')], html_message=html_message)
-                except:
-                    pass
+
+                            subject = str(current_user) + ' needs your help, please check up'
+                            html_message = render_to_string('help_mail_template.html', 
+                            context={'goal_one':new_comb_list[0][0],'bool_one':new_comb_list[0][1], 'time_one':new_comb_list[0][2],
+                                    'goal_two':new_comb_list[1][0],'bool_two':new_comb_list[1][1], 'time_two':new_comb_list[1][2],
+                                    'goal_three':new_comb_list[2][0],'bool_three':new_comb_list[2][1], 'time_three':new_comb_list[2][2],
+                                    'date_now':now, 'user':current_user })
+
+                            plain_message = strip_tags(html_message)
+                            from_email = 'mitchelinajuo@gmail.com'
+                            to = str(email_list[0])
+                            to_email = str(email_list[0])
+                            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+                            mail.send_mail(subject, plain_message, from_email, [str('mitchelinaju@yahoo.com')], html_message=html_message)
+                            mail.send_mail(subject, plain_message, from_email, [str('mitchelballzz@gmail.com')], html_message=html_message)
+                        except:
+                            pass
+                        
+                        
+                if current_user not in users_to_send:
+                    users_to_send.append(current_user)
+        print(details_list_internal)
+
+    print(users_to_send)
+    
 
         
 
