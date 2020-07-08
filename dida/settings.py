@@ -10,10 +10,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import django_heroku
 import dj_database_url 
-from boto.s3.connection import S3Connection
-DJANGO_KEY = S3Connection(os.environ['KEY'])
-AWS_PASSWORD=S3Connection(os.environ['AMASON_PASSWORD'])
-AWS_USER=S3Connection(os.environ['AMAZON_USER'])
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
