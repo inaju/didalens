@@ -1,0 +1,20 @@
+<center>
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form  method="post">
+{% csrf_token %}
+<p>Did you <b>{{details_list}}</b> Today?</b></p>
+{% for i in goalordinaryform %}
+{% for j in formfalse %}
+<p>Yes:{{i}}</p>
+
+<p>No: {{j}}</p>
+{% endfor %}
+{% endfor %}
+<button type="submit" class="btn btn-success login-button">Submit</button>
+</form>
+{% endblock %}
+</center>

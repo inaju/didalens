@@ -1,0 +1,27 @@
+#goals {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#goals td,
+#goals th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#goals tr:nth-child(even) {
+    background-color: #3c384dc9;
+}
+
+#goals tr:hover {
+    background-color: #ddd;
+}
+
+#goals th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}

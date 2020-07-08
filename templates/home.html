@@ -1,0 +1,27 @@
+    <center>
+    {% extends 'stone.html' %}
+
+    {% block title %}Didalens Home{% endblock  %}
+
+    {% block content %}
+    
+  <div class="heading">
+    <h2>Didalens</h2>
+    <p>Focus on is the way forward</p>
+    <div class="form-buttons">
+      <form method="post" action='/users/signup/'>
+      {% csrf_token %}
+      <button type="submit" class="button first-button">Get Started</button>
+      </form>
+      <form method="post" action='/users/account/login/'>
+      {% csrf_token %}
+      <button type="submit" class="button second-button">Login</button>
+      </form>
+
+  </div>
+
+
+  </div>
+    {% endblock content %}
+
+    </center>

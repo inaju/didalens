@@ -1,0 +1,16 @@
+<center>
+    {% extends 'stone.html' %}
+
+
+{% block content %}
+
+{% for things in partners %}
+{{things}}
+{% endfor %}
+<p><a href='/goals/partnererror/'>Create another partner</a></p>
+<hr>
+
+
+
+{% endblock %}
+</center>

@@ -1,0 +1,1 @@
+web: gunicorn dida.wsgi --log-file -

@@ -1,0 +1,16 @@
+{% extends 'stone.html' %}
+
+<center>
+<form method="post">
+{% csrf_token %}
+
+<p>Please Choose: <b>{{details_list}}</b></p>
+
+<p> {{details.datetogoal.label_tag}} {{details.datetogoal}}</p>
+<p> {{details.is_true.label_tag}} {{details.is_true}}</p>
+<button type="submit" class="btn btn-success login-button">Submit</button>
+
+</form>
+
+</center>
+

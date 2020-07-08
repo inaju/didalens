@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+dump
+\dump
+sent_emails
+myfile.txt
+myOutFile.txt
+*.sqlite3
+.sqlite3
+.env
+dida\secrets.py
+dida\settings.py

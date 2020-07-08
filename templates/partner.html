@@ -1,0 +1,18 @@
+    {% extends 'stone.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<center>
+<div class="form-group">  
+<h2>Enter Accountability Partner's Details</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ partner_form|crispy }}
+  <button type="submit" class="button button-create-goal">Submit</button>
+  </div>    
+  </form>
+
+  </div>
+</center>
+{% endblock content %}

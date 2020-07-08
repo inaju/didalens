@@ -1,0 +1,33 @@
+  
+
+    {% extends 'stone.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up
+{% endblock title %}
+
+{% block content %}
+<center>
+<div class="row">
+ <div class="col-sm">
+    </div>
+ <div class="col-sm">
+<form method='post'>
+{% csrf_token %}
+<div class="form-row">
+<div class="form-group ">
+<h2>Sign Up</h2>
+
+{{ form |crispy }}
+
+<button type="submit" class="button">Sign Up</button>
+</div>
+</div>
+</form>
+    </div>
+ <div class="col-sm">
+    </div>
+</div>
+</center>
+{% endblock content %}
+  

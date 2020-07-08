@@ -1,0 +1,37 @@
+<center>
+    {% extends 'stone.html' %}
+
+
+{% block content %}
+{% for things in show_goal %}
+<h2>{{things}}</h2>
+{% for other in show_date %}
+{% if things.id is other.datetogoal.id %}
+
+
+<p>{{other.date}} {{other.time}} {{other.is_true}} </p>
+
+{% endif %}
+{% endfor %}
+<hr>
+
+{% endfor %}
+
+<div class='pagination'>
+{% if items.has_previous %}
+
+<p><a href="?page=1">First</a></p>
+<p><a href="?page={{items.previous_page_number}}">Previous</a></p>
+{% endif %}
+
+<strong><span>{{items.number}}</span></strong><span>&nbsp;of&nbsp;</span> <span>{{items.paginator.num_pages}}</span></p>
+{% if  items.has_next %}
+&nbsp;
+<p><a href="?page={{items.next_page_number}}">Next</a></p>
+&nbsp;
+<p><a href="?page={{items.paginator.num_pages}}">Previous</a></p>
+
+{% endif %}
+</div>
+{% endblock %}
+</center>

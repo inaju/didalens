@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+        h1   {color: rgb(6, 7, 8);}
+        p    {color: rgb(6, 7, 8);}
+
+
+
+#goals {font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; border-collapse: collapse; width: 100%;}       
+
+#goals td,
+#goals th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#goals tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#goals tr:hover {
+    background-color: #ddd;
+}
+
+#goals th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(34, 59, 170);
+    color: white;
+}
+        </style>
+
+
+</head>
+<body>
+                
+
+<h2>Hi</h2>
+<h3><b>{{user}}</b> needs your help, please check up on <b>{{user}}</b><h3>
+<p><b>{{user}}</b> hasn't been really consistent with the goals they setup, would be really pleased if you could reach out</p>
+<p>This is {{user}}'s score card for {{date_now}}</p>
+
+<p>{{user}} hasn't done</p>
+{% if bool_one is False %}
+<p>  <b>{{goal_one}}</b> today</p>
+{% endif %}
+
+{% if bool_two is False %}
+<p> <b>{{goal_two}}</b> today</p>
+{% endif %}
+{% if bool_three is False %}
+<p> <b>{{goal_three}}</b> today</p>
+{% endif %}
+
+<table id="goals">
+
+<tr>
+<th>Goal</th>
+<th>Time</th>
+<th>True or False</th>  
+</tr>
+
+<tr>
+<td>{{goal_one}}</td>
+
+<td>{{time_one}}</td>
+<td>{{bool_one}}</td>
+</tr>
+
+
+<tr>
+    <td>{{goal_two}}</td>
+    
+    <td>{{time_two}}</td>
+    <td>{{bool_two}}</td>
+    </tr>
+
+  
+<tr>
+    <td>{{goal_three}}</td>
+    
+    <td>{{time_three}}</td>
+    <td>{{bool_three}}</td>
+</tr>  
+
+
+
+
+</table>
+
+</div>
+
+
+</body>
+</html>

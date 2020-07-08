@@ -1,0 +1,47 @@
+<center>
+    {% extends 'stone.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Register your Third Goal{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-sm">
+    </div>
+
+    <div class="col-sm">
+<form method="post"  >
+<h2>Please Register Your Third Goal</h2>
+{% csrf_token %}
+
+{% for i in goal %}
+{% if i.non_field_errors %}
+        <div class="form-group text-error">
+            {{ i.non_field_errors }}
+        </div>
+        {{i}}
+    {% endif %}
+{{i|as_crispy_field }}
+
+{% endfor %}
+
+<input type='submit' value='submit' class="button button-create-goal">
+
+
+  </form>
+
+  </div>
+
+    <div class="col-sm">
+    </div>
+
+  </div>
+
+
+
+
+</form>
+{% endblock %}
+</center>

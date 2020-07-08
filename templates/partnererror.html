@@ -1,0 +1,15 @@
+<center>
+    {% extends 'stone.html' %}
+
+
+{% block content %}
+{% for things in partners  %}
+<p>{{things}}</p>
+{% endfor %}
+<p >You are only allowed to create one accountability partner</p>
+<hr>
+
+
+
+{% endblock %}
+</center>
