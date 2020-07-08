@@ -10,6 +10,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import django_heroku
 import dj_database_url 
+from boto.s3.connection import S3Connection
+DJANGO_KEY = S3Connection(os.environ['KEY'])
+AWS_PASSWORD=S3Connection(os.environ['AMASON_PASSWORD'])
+AWS_USER=S3Connection(os.environ['AMAZON_USER'])
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -18,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = KEY
+SECRET_KEY = DJANGO_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -135,8 +139,8 @@ LOGOUT_REDIRECT_URL='home'
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER =AMAZON_USER
-EMAIL_HOST_PASSWORD =AMASON_PASSWORD
+EMAIL_HOST_USER =AWS_USER
+EMAIL_HOST_PASSWORD =AWS_PASSWORD
 
 
 # Activate Django-Heroku.
