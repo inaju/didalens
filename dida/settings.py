@@ -11,7 +11,7 @@ import os
 import django_heroku
 import dj_database_url 
 from boto.s3.connection import S3Connection
-s3 = S3Connection(os.environ['AMASON_PASSWORD'], os.environ['AMAZON_USER'],  os.environ['DATABASE_URL'], os.environ['KEY:'] )
+s3 = S3Connection(os.environ['AMASON_PASSWORD'], os.environ['AMAZON_USER'],  os.environ['DATABASE_URL'], os.environ['KEY'] )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
