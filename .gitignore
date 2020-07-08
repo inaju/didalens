@@ -8,5 +8,5 @@ myOutFile.txt
 *.sqlite3
 .sqlite3
 .env
-dida\secrets.py
-dida\settings.py
+secrets.py
+secret_folder
