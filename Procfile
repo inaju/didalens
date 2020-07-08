@@ -1,1 +1,1 @@
-web: gunicorn dida.wsgi:didalens --log-file -
+web: gunicorn dida.wsgi --log-file -

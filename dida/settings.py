@@ -139,8 +139,8 @@ LOGOUT_REDIRECT_URL='home'
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER =AWS_USER
-EMAIL_HOST_PASSWORD =AWS_PASSWORD
+EMAIL_HOST_USER =os.environ.get(AMAZON_USER)
+EMAIL_HOST_PASSWORD =os.environ.get(AMASON_PASSWORD)
 
 
 # Activate Django-Heroku.
