@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv(KEY)
+SECRET_KEY = os.getenv('KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -138,8 +138,8 @@ LOGOUT_REDIRECT_URL='home'
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER =os.getenv(AMAZON_USER)
-EMAIL_HOST_PASSWORD =os.getenv(AMASON_PASSWORD)
+EMAIL_HOST_USER =os.getenv('AMAZON_USER')
+EMAIL_HOST_PASSWORD =os.getenv('AMASON_PASSWORD')
 
 
 # Activate Django-Heroku.
