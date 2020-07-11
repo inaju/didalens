@@ -275,7 +275,7 @@ def goalfull(request):
                 'date_now':now })
 
         plain_message = strip_tags(html_message)
-        from_email = 'mitchel@didalens.me'
+        from_email = 'mitchelinajuo@gmail.com'
         to = str(email_list[0])
 
         to_email = str(email_list[0])
@@ -467,7 +467,7 @@ def failed_goal_list(request):
                             'date_now':now, 'user':current_user })
 
                     plain_message = strip_tags(html_message)
-                    from_email = 'mitchel@didalens.me'
+                    from_email = 'mitchelinajuo@gmail.com'
                     to = str(email_list[0])
                     to_email = str(email_list[0])
                     print(to)
@@ -487,10 +487,10 @@ def send_test_email(request):
     send_mail(
     'Subject here',
     'Here is the message.',
-    'mitchel@didalens.me',
+    'mitchelinajuo@gmail.com',
     ['mitchelinajuo@gmail.com'],
     fail_silently=False,
     )
-    
+
 
     return HttpResponse('sent mail --done')
