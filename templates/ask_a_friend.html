@@ -1,0 +1,19 @@
+{% extends 'stone.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<center>
+<div class="form-group">  
+<h2>Please Enter Your details</h2>
+<p>{{current_user_rq_send}} has requested that you help them acheving their goals</p>
+<p>Please enter your details to become an accountability partner</p>
+<form method="post">
+  {% csrf_token %}
+  {{ partner_form|crispy }}
+  <button type="submit" class="button">Submit</button>
+  </div>    
+  </form>
+</div>
+</center>
+
+{% endblock %}

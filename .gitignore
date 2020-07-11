@@ -1,7 +1,6 @@
 __pycache__
 *.pyc
 dump
-\dump
 sent_emails
 myfile.txt
 myOutFile.txt
@@ -9,4 +8,5 @@ myOutFile.txt
 .sqlite3
 .env
 secrets.py
-secret_folder
+secrets_folder
+secrets_folder/prod_settings.py

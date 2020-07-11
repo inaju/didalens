@@ -5,11 +5,11 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" as="style" onload="this.rel = 'stylesheet'" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i|Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;display=swap">
 <style>
 body {
   margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Merriweather', serif;
     }
 
 .topnav 
@@ -69,21 +69,57 @@ body {
     color:white;
     border: none;
     padding:5px;
-}
-
-.button-create-goal{
-  margin-top:15px;
+    margin-top:15px;
 }
 
 
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
-  }
+
+
+}
 }
 
 @media screen and (max-width: 600px) {
@@ -98,6 +134,9 @@ body {
     display: block;
     text-align: left;
   }
+
+      
+
 
 }
 </style>
@@ -132,6 +171,21 @@ body {
 
 
 <script>
+document.getElementById("cp_btn").addEventListener("click", copy_password);
+
+function copy_password() {
+    var copyText = document.getElementById("pwd_spn");
+    var textArea = document.createElement("textarea");
+    textArea.value = copyText.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
+    alert("Copied the text: " + textArea.value);
+    
+}
+
+
 function myFunction() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -140,6 +194,8 @@ function myFunction() {
     x.className = "topnav";
   }
 }
+
+
 </script>
 
 </body>
