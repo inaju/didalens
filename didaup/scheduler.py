@@ -21,8 +21,10 @@ def job():
         chrome_options.add_argument('--no-sandbox')
         driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         driver.get("didalens.herokuapp.com/goals/goalreminder/")
+        driver.get("didalens.herokuapp.com/goals/goalfull/")
         driver.get("didalens.herokuapp.com/goals/fakeemail/")
         print('done')
+        print(driver)
     except:
         e = sys.exc_info()[0]
         print('it failed, this is the error ', e)

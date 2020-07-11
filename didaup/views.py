@@ -492,4 +492,4 @@ def send_test_email(request):
     fail_silently=False,
     )
 
-    print('done')
+    return HttpResponse('sent mail --done')
