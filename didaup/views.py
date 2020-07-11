@@ -348,8 +348,6 @@ def create_accountability_partners(request):
 @login_required(login_url="/users/account/login/")
 def show_partner(request):
     partners=AccountabilityPartner.objects.filter(user=request.user)
-    goal_reminder(request)
-    
 
     return render(request, 'showpartner.html', context={'partners':partners})
 
