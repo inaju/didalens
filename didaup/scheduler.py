@@ -8,9 +8,7 @@ import webbrowser
 
 
 def job():
-    r = requests.post('http://127.0.0.1:8000/goals/goalfull/')
     webbrowser.open('http://didalens.herokuapp.com/goals/goalfull/')
-    print(r.status_code)
 
 schedule.every(0.01).minutes.do(job)
 
