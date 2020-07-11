@@ -491,5 +491,6 @@ def send_test_email(request):
     ['mitchelinajuo@gmail.com'],
     fail_silently=False,
     )
+    
 
     return HttpResponse('sent mail --done')
