@@ -9,4 +9,3 @@ myOutFile.txt
 .env
 secrets.py
 secrets_folder
-secrets_folder/prod_settings.py
