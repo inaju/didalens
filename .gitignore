@@ -9,5 +9,4 @@ myOutFile.txt
 .env
 secrets.py
 secrets_folder
-settings.py
-dida/settings.py
+secrets_folder/prod_settings.py
