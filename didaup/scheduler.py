@@ -1,16 +1,16 @@
 import schedule
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import os
 import requests
 import webbrowser
 import sys
 
+
 def job():
     try:
         #webbrowser.open('http://didalens.herokuapp.com/goals/goalfull/')
-        GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
-        CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         chrome_options.add_argument("--headless")
@@ -24,6 +24,7 @@ def job():
     except:
         e = sys.exc_info()[0]
         print('it failed, this is the error ', e)
+
 
 schedule.every(0.01).minutes.do(job)
 
