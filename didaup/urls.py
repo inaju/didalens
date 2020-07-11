@@ -17,8 +17,12 @@ urlpatterns = [
     path('show/', views.show, name='show'),
     path('goalfull/', views.goalfull, name='goalfull'),
     path('partner/', views.create_accountability_partners, name='partner'),
+    path('partner/<int:user_id>/', views.create_accountability_partners, name='partner_link'),
     path('showpartner/', views.show_partner, name='showpartner'),
     path('partnererror/', views.partner_error, name='partnererror'),
     path('goalreminder/', views.failed_goal_list, name='goalreminder'),
+    path('ask_a_friend/', views.ask_a_friend, name='ask_a_friend'),
+    path('ask_a_friend/<int:user_id>/', views.ask_a_friend, name='ask_a_friend_link'),
+    path('thankyou/', views.thank_you, name='thank_you'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

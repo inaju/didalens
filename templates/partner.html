@@ -13,6 +13,16 @@
   </div>    
   </form>
 
+  {% if number is 1 %}
+  <p>this is filled up</p>
+
+  {% else %}
+  <span id="pwd_spn" class="password-span"><a href="/goals/ask_a_friend/{{user_id}}/">{{link}}/{{user_id}}</a></span>
+
+<button id="cp_btn" class="button">Copy</button>
+
+
+  {% endif %}
   </div>
 </center>
 {% endblock content %}
