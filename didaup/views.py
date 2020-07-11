@@ -481,3 +481,15 @@ def failed_goal_list(request):
 
         
 
+
+def send_test_email(request):
+
+    send_mail(
+    'Subject here',
+    'Here is the message.',
+    'mitchel@didalens.me',
+    ['mitchelinajuo@gmail.com'],
+    fail_silently=False,
+    )
+
+    print('done')
