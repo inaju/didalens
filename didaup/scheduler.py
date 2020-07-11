@@ -12,14 +12,9 @@ def job():
     try:
         #webbrowser.open('http://didalens.herokuapp.com/goals/goalfull/')
         options = Options()
+        print(os.environ.get('GOOGLE_CHROME_BIN'))
+        print(os.environ.get('CHROMEDRIVER_PATH'))
 
-        options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
-
-        options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        options.add_argument('--no-sandbox')
-
-        return webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH')), chrome_options=options)
         print('done')
     except:
         e = sys.exc_info()[0]
