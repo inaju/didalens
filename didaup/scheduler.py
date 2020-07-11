@@ -1,15 +1,25 @@
 import schedule
 import time
-from tests import name
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from selenium import webdriver
+import os
 import requests
 import webbrowser
 import sys
 
 def job():
     try:
-        webbrowser.open('http://didalens.herokuapp.com/goals/goalfull/')
+        #webbrowser.open('http://didalens.herokuapp.com/goals/goalfull/')
+        GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+        CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        driver.get('https://duckduckgo.com')
+        driver.get('http://didalens.herokuapp.com/goals/goalfull/')
+
         print('done')
     except:
         e = sys.exc_info()[0]
