@@ -16,7 +16,6 @@ from django.core.paginator import Paginator
 from datetime import datetime, date
 import time
 from django.utils import timezone
-from selenium import webdriver
 
 #create_goal is responsible for creating goals for individual users
 @login_required(login_url="/users/account/login/")
@@ -348,7 +347,6 @@ def create_accountability_partners(request):
 @login_required(login_url="/users/account/login/")
 def show_partner(request):
     partners=AccountabilityPartner.objects.filter(user=request.user)
-    goal_reminder(request)
     
 
     return render(request, 'showpartner.html', context={'partners':partners})
