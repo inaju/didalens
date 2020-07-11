@@ -5,10 +5,15 @@ from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from selenium import webdriver
 import requests
 import webbrowser
-
+import sys
 
 def job():
-    webbrowser.open('http://didalens.herokuapp.com/goals/goalfull/')
+    try:
+        webbrowser.open('http://didalens.herokuapp.com/goals/goalfull/')
+        print('done')
+    except:
+        e = sys.exc_info()[0]
+        print('it failed, this is the error ', e)
 
 schedule.every(0.01).minutes.do(job)
 
