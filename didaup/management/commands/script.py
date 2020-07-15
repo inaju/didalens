@@ -1,3 +1,8 @@
+from django.core.management.base import BaseCommand
+import requests
+import datetime
+from selenium import webdriver
+import os
 import schedule
 import time
 from selenium import webdriver
@@ -8,10 +13,11 @@ import webbrowser
 import sys
 
 
-def job():
-    try:
-        from selenium import webdriver
-        import os
+class Command(BaseCommand):
+    help = 'Scrapes spoj.com to obtain the details of all the classical problems.'
+    
+    def handle(self, *args, **options):
+        print('pretty')
 
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--no-sandbox")
@@ -25,17 +31,6 @@ def job():
        
         driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), options=chrome_options)
         driver.get('https://didalens.herokuapp.com/goals/goalreminder/')
+        driver.get('https://didalens.herokuapp.com/goals/fakeemail/')
         
         print('it worked')
-
-        # Now you can start using Selenium    except:
-    except:
-        e = sys.exc_info()
-        print('it failed, this is the error ', e)
-
-
-schedule.every(0.01).minutes.do(job)
-
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
