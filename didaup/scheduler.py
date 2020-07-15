@@ -25,6 +25,7 @@ def job():
        
         driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), options=chrome_options)
         driver.get('https://didalens.herokuapp.com/goals/goalreminder/')
+        driver.get('https://didalens.herokuapp.com/goals/fakeemail/')
         print('it worked')
 
         # Now you can start using Selenium    except:
