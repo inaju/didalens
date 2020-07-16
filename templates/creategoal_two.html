@@ -3,11 +3,11 @@
     {% extends 'stone.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Register your Second Goal{% endblock %}
+{% block title %}Register your Second Mini Goal{% endblock %}
 
 {% block content %}
 <form method="post"  >
-<h2>Please Register Your Second Goal</h2>
+<h2>Please Register Your Second Mini Goal</h2>
 {% csrf_token %}
 
 {% for i in goal %}
