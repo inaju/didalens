@@ -14,11 +14,11 @@ def job():
         import os
 
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = "/app/.apt/usr/bin/google-chrome"
+        chrome_options.binary_location = os.getenv('GOOGLE_CHROME_BIN_S')
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        driver = webdriver.Chrome(executable_path='/app/.chromedriver/bin/chromedriver', chrome_options=chrome_options)
+        driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), chrome_options=chrome_options)
 
         # Now you can start using Selenium    except:
     except:
