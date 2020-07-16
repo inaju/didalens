@@ -26,6 +26,7 @@ urlpatterns = [
     path('thankyou/', views.thank_you, name='thank_you'),
     path('fakeemail/', views.send_test_email, name='fake_email'),
     path('aboutdidalens/', views.about_didalens, name='fake_email'),
+    path('detailserror/', views.details_error, name='details_error')
     
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

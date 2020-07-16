@@ -126,7 +126,7 @@ def daily_details(request):
     try:
         details_list=GoalList.objects.filter(user=request.user)[0:1].get()
     except:
-        return HttpResponse('no data')
+        return HttpResponseRedirect('/goals/detailserror/')    
     
     q=GoalModel()
     if request.method == 'POST' and request.user.is_authenticated:
@@ -216,6 +216,10 @@ def daily_details_three(request):
 
 
     return render(request, 'details.html', { 'details_list':details_list, 'goalordinaryform':goalordinaryform,'formfalse':formfalse})
+
+def details_error(request):
+    
+    return render(request, 'details_error.html') 
 
 
 def about_didalens(request):
