@@ -24,7 +24,7 @@ def job():
         chrome_options.binary_location = os.getenv('GOOGLE_CHROME_BIN_S')
        
         driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), options=chrome_options)
-        driver.get('http://127.0.0.1:8000/goals/goal_reminder/')
+        driver.get('http://127.0.0.1:8000/goals/goalreminder/')
         print('it worked')
 
         # Now you can start using Selenium    except:
