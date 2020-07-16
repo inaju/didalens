@@ -19,7 +19,14 @@
 <h2>Sign Up</h2>
 
 {{ form |crispy }}
-
+<div class="signup-form">
+<p>{{form.email.label_tag}}</p>
+{{form.email}} 
+<p>{{form.first_name}}{{form.first_name.label_tag}}</p>
+<p>{{form.last_name}}{{form.last_name.label_tag}}</p>
+<p>{{form.password1}}{{form.password1.label_tag}}</p>
+<p>{{form.password2}}{{form.password2.label_tag}}</p>
+</div>
 <button type="submit" class="button button-create-goal">Sign Up</button>
 </div>
 </div>

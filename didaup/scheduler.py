@@ -23,7 +23,7 @@ def job():
         chrome_options.add_argument('--ignore-certificate-errors')
         chrome_options.add_argument("--remote-debugging-port=9222")
         chrome_options.binary_location = os.getenv('GOOGLE_CHROME_BIN_S')
-        driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), chrome_options=chrome_options)
+        driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), options=chrome_options)
 
         # Now you can start using Selenium    except:
     except:
