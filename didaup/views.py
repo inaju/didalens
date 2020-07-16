@@ -216,7 +216,12 @@ def daily_details_three(request):
 
 
     return render(request, 'details.html', { 'details_list':details_list, 'goalordinaryform':goalordinaryform,'formfalse':formfalse})
- 
+
+
+def about_didalens(request):
+    return render(request, 'about_didalens.html')
+
+
 @login_required(login_url="/users/account/login/")
 def show(request):
     show_goal= GoalList.objects.filter(user=request.user)

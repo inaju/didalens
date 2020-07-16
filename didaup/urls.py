@@ -25,5 +25,7 @@ urlpatterns = [
     path('ask_a_friend/<int:user_id>/', views.ask_a_friend, name='ask_a_friend_link'),
     path('thankyou/', views.thank_you, name='thank_you'),
     path('fakeemail/', views.send_test_email, name='fake_email'),
+    path('aboutdidalens/', views.about_didalens, name='fake_email'),
+    
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -20,29 +20,37 @@
 
 <div class="signup-form">
 
+
+{% if form.errors %} 
 <div class="email form">
+
 <p>{{form.email.label_tag}}</p>
 {{form.email}}
+<p style="color:blue; font-size:10px;">{{form.email.errors}} </p>
 </div>
 <div class="first_name form">
 
 <p>{{form.first_name.label_tag}}</p>
 {{form.first_name}}
+{{form.first_name.errors}} 
 </div>
 
 <div class="last_name form">
 <p>{{form.last_name.label_tag}}</p>
 {{form.last_name}}
+{{form.last_name.errors}} 
 </div>
 
 <div class="password1 form">
 <p>{{form.password1.label_tag}}</p>
 {{form.password1}}
+{{form.password1.errors}} 
 </div>
 
 <div class="password2 form">
 <p>{{form.password2.label_tag}}</p>
 {{form.password2}}
+{{form.password2.errors}} 
 </div>
 </div>
 <button type="submit" class="button button-create-goal">Sign Up</button>
@@ -53,6 +61,7 @@
  <div class="col-sm">
     </div>
 </div>
+{% endif %}
 </center>
 {% endblock content %}
   

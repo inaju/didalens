@@ -1,0 +1,62 @@
+    <center>
+    {% extends 'stone.html' %}
+
+    {% block title %}Didalens Home{% endblock  %}
+
+    {% block content %}
+    
+      <h1>Didalens</h1>
+      
+        <div class="what_is_the_problem">
+            <h2>What is the problem?</h2>
+
+            <p>Do you have goals that you wish you could really be consistent with?</p>
+            <p>Day in day out?</p>
+            <p>We want to help you achieve your goals faster than the average man</p>
+            <p>That's why Didalens was created, to give you that creative edge</p>
+            <br>
+            <p>We believe in systems</p>
+            <p>We believe that a genius without a plan would be beaten by an idiot with a plan</p>
+            <p> The American Society of Training and Development found that people are 65 percent likely to meet a goal after committing to another person. Their chances of success increase to 95 percent when they build in ongoing meetings with their partners to check in on their progress.</p>
+            <p>You would need just one accountability partner for now, you would be givin a link to send to your accountability partner, or you can fill their details for them if you know it</p>
+
+
+        </div>
+
+        <div class="how_does_it_work">
+        <h2>How would Didalens help you?</h2>
+        <p>You would be required to create mini goals in order to smash your big goals</p>
+        <p>Think about the bigger picture, in order to create the picture, we need to focus on the pixels more</p>
+        <p>For Example, you want to write a book, the mini goal is to write 100 words per day</p>
+        <p>You want yo loose weight, your mini goal should be to run for 10 mins everyday</p>
+        <p>You want to read 1 book every month, your mini goal should be to read 15 pages per day</p>
+        <p>You want to know grow spiritually , your mini goal would be to pray for 30 mins everyday and study 3 chapters of the new testament</p>
+        <br>
+        <p>Think about it, the person who would be consistent with 15 pages per day, would read 15 x 30(450) pages per month, resulting to 15 x 30 x 12(5400) pages per year
+        that's more than what an average person would do</p>
+        <p>The person who would write 100 words per day would end up with 700 words by the end of the week and 2800 words by the end of the month</p>
+
+        <p>Everyday, you would be required to come here and document whether you did you daily goals or not</p>
+        <p>Then we would send a daily report mail to your accountability partner</p>
+
+        <div class="form-buttons">
+            <form method="post" action='/users/signup/'>
+            {% csrf_token %}
+            <button type="submit" class="button first-button">Get Started</button>
+            </form>
+            <form method="post" action='/users/account/login/'>
+            {% csrf_token %}
+            <button type="submit" class="button second-button">Login</button>
+            </form>
+        </div>
+
+        </div>
+
+
+
+
+
+
+    {% endblock content %}
+
+    </center>
