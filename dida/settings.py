@@ -11,8 +11,16 @@ import django_heroku
 import dj_database_url 
 from boto.s3.connection import S3Connection
 
-
-s3 = S3Connection(os.environ['AMASON_PASSWORD'], os.environ['AMAZON_USER'],  os.environ['DATABASE_URL'], os.environ['KEY'] )
+try:
+    s3 = S3Connection(os.environ['AMASON_PASSWORD'], os.environ['AMAZON_USER'],  os.environ['DATABASE_URL'], os.environ['KEY'] )
+    EMAIL_HOST_USER =os.getenv('AMAZON_USER')
+    EMAIL_HOST_PASSWORD =os.getenv('AMASON_PASSWORD')
+    SECRET_KEY = os.getenv('KEY')
+except:
+    from secrets_folder.secrets import *
+    EMAIL_HOST_USER=AMAZON_USER
+    EMAIL_HOST_PASSWORD=AMASON_PASSWORD
+    SECRET_KEY = KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,7 +40,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = False
 
 ALLOWED_HOSTS = ['didalens.herokuapp.com']
-SECRET_KEY = os.getenv('KEY')
 
 
 # Application definition
@@ -144,9 +151,6 @@ LOGOUT_REDIRECT_URL='home'
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER =os.getenv('AMAZON_USER')
-EMAIL_HOST_PASSWORD =os.getenv('AMASON_PASSWORD')
-
 
 '''check the upperpart of the file for the remining credentials'''
 
