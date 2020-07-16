@@ -21,7 +21,10 @@ def job():
         driver.get("didalens.herokuapp.com/goals/fakeemail/")
         driver.close()
         print('done')
-    except selenium.common.exceptions.WebDriverException:
+    except:
+        e = sys.exc_info()
+        print('it failed, this is the error ', e)
+
         chrome_options = Options()
         chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
         chrome_options.add_argument('--disable-gpu')
@@ -29,7 +32,7 @@ def job():
         driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         driver.get("didalens.herokuapp.com/goals/fakeemail/")
         driver.close()
-        print('done')
+        print('done in except')
 
 
 schedule.every(0.01).minutes.do(job)
