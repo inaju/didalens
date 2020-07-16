@@ -18,14 +18,32 @@
 <div class="form-group ">
 <h2>Sign Up</h2>
 
-{{ form |crispy }}
 <div class="signup-form">
+
+<div class="email form">
 <p>{{form.email.label_tag}}</p>
-{{form.email}} 
-<p>{{form.first_name}}{{form.first_name.label_tag}}</p>
-<p>{{form.last_name}}{{form.last_name.label_tag}}</p>
-<p>{{form.password1}}{{form.password1.label_tag}}</p>
-<p>{{form.password2}}{{form.password2.label_tag}}</p>
+{{form.email}}
+</div>
+<div class="first_name form">
+
+<p>{{form.first_name.label_tag}}</p>
+{{form.first_name}}
+</div>
+
+<div class="last_name form">
+<p>{{form.last_name.label_tag}}</p>
+{{form.last_name}}
+</div>
+
+<div class="password1 form">
+<p>{{form.password1.label_tag}}</p>
+{{form.password1}}
+</div>
+
+<div class="password2 form">
+<p>{{form.password2.label_tag}}</p>
+{{form.password2}}
+</div>
 </div>
 <button type="submit" class="button button-create-goal">Sign Up</button>
 </div>
