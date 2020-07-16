@@ -22,17 +22,15 @@ def job():
         chrome_options.add_argument("--remote-debugging-port=9222")
 
         chrome_options.binary_location = os.getenv('GOOGLE_CHROME_BIN_S')
-        print(os.getenv('GOOGLE_CHROME_BIN_S'))
+       
         driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), options=chrome_options)
         driver.get('http://127.0.0.1:8000/goals/goal_reminder/')
-        print(os.getenv('CHROMEDRIVER_PATH_S'))
+        print('it worked')
 
         # Now you can start using Selenium    except:
     except:
         e = sys.exc_info()
         print('it failed, this is the error ', e)
-        print(os.getenv('GOOGLE_CHROME_BIN_S'))
-        print(os.getenv('CHROMEDRIVER_PATH_S'))
 
 
 schedule.every(0.01).minutes.do(job)
