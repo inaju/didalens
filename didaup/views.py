@@ -453,7 +453,7 @@ def failed_goal_list(request):
             date_list.append(i.date)
         
         for date in date_list[-3:]:
-            if str(date) == datetime.now().date().strftime("%Y-%m-%d"):
+            if str(date) != datetime.now().date().strftime("%Y-%m-%d"):
                 print(current_user,date , datetime.now().date().strftime("%Y-%m-%d"))
                 
                 while j < 4:
@@ -560,13 +560,13 @@ def make_goal_false(request):
 
             j += 1
 
-        send_mail(
-        'Subject here',
-        'done makeing goals false and sending mails.',
-        'mitchelinajuo@gmail.com',
-        ['mitchelinajuo@gmail.com'],
-        fail_silently=False,
-        )
+    send_mail(
+    'Subject here',
+    'done makeing goals false and sending mails.',
+    'mitchelinajuo@gmail.com',
+    ['mitchelinajuo@gmail.com'],
+    fail_silently=False,
+    )
     return HttpResponse('Done with all users')
 
 
