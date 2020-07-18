@@ -123,11 +123,32 @@ def create_goal_three(request):
             except :
                 pass
 
+            
+            
+            """make goal false on default"""
             details_list=GoalList.objects.filter(user=request.user)[2:3].get()
             model_false=GoalModel(user=request.user, datetogoal=details_list, is_true=False)
             model_false.save()
 
+            users=CustomUser.objects.filter()
+            
 
+            for user in users:
+                if user == request.user:
+                    
+                    """send goal report to accountability partner"""
+                    subject = "Dear " + str(user) + ' Welcome To Didalens'
+                    html_message = render_to_string('welcome_mail.html')
+
+                    plain_message = strip_tags(html_message)
+                    from_email = 'mitchelinajuo@gmail.com'
+                    to = str(user.email)
+                    print(to)
+                    print(user.email)
+            
+                    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
+                
             
             
             return HttpResponseRedirect('/goals/partner/')
@@ -135,6 +156,8 @@ def create_goal_three(request):
 
     else:
         goal = GoalForm()
+        
+
     
     return render(request, 'creategoal_three.html', { 'goal': goal})
 
