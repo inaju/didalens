@@ -559,6 +559,14 @@ def make_goal_false(request):
             print(user)
 
             j += 1
+
+        send_mail(
+        'Subject here',
+        'done makeing goals false and sending mails.',
+        'mitchelinajuo@gmail.com',
+        ['mitchelinajuo@gmail.com'],
+        fail_silently=False,
+        )
     return HttpResponse('Done with all users')
 
 
