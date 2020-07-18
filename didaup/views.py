@@ -457,6 +457,7 @@ def failed_goal_list(request):
                 print(current_user,date , datetime.now().date().strftime("%Y-%m-%d"))
                 
                 while j < 4:
+                    """loop through all the goals"""
                     
                     details_list=GoalList.objects.filter(user=current_user)[j-1:j].get()
 
