@@ -34,7 +34,6 @@ def create_goal(request):
     q=GoalList(user=request.user)
     if request.method == 'POST' and request.user.is_authenticated:
         goal = GoalForm(request.POST)
-        
 
         #if the form is valid...continue
         # save Goallist.user to be = the connected user
@@ -43,12 +42,17 @@ def create_goal(request):
             q.user=request.user
             q.goal=request.POST['goal']
             
+            
             try:
                 q.save()
+                #model_false.save()
+                print('saved model')
                 #goal.save()
             except :
                 pass            
             
+            model_false=GoalModel(user=request.user, datetogoal=request.POST['goal'], is_true=False)
+            print(model_false.user)
             return HttpResponseRedirect('/goals/secondgoal/')
 
     else:
@@ -75,8 +79,10 @@ def create_goal_two(request):
         if goal.is_valid():
             q.user=request.user
             q.goal=request.POST['goal']
-            
+            model_false=GoalModel(user=request.user, datetogoal=request.POST['goal'], is_true=False)
+
             try:
+                model_false.save()
                 q.save()
                 #goal.save()
             except :
@@ -105,8 +111,10 @@ def create_goal_three(request):
         if goal.is_valid():
             q.user=request.user
             q.goal=request.POST['goal']
-            
+            model_false=GoalModel(user=request.user, datetogoal=request.POST['goal'], is_true=False)
+
             try:
+                model_false.save()
                 q.save()
                 #goal.save()
             except :
