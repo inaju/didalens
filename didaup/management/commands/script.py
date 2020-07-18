@@ -30,7 +30,6 @@ class Command(BaseCommand):
         chrome_options.binary_location = os.getenv('GOOGLE_CHROME_BIN_S')
     
         driver = webdriver.Chrome(executable_path=os.getenv('CHROMEDRIVER_PATH_S'), options=chrome_options)
-        driver.get('https://didalens.herokuapp.com/goals/goalreminder/')
         driver.get('https://didalens.herokuapp.com/goals/makegoalfalse/')
         driver.get('https://didalens.herokuapp.com/goals/goalreminder/')
         print('it worked')
