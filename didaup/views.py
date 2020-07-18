@@ -559,6 +559,7 @@ def make_goal_false(request):
             print(user)
 
             j += 1
+    return HttpResponse('Done with all users')
 
 
             
