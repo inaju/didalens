@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+        h1   {color: rgb(6, 7, 8);}
+        p    {color: rgb(6, 7, 8);}
+
+
+
+#goals {font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; border-collapse: collapse; width: 100%;}       
+
+#goals td,
+#goals th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#goals tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#goals tr:hover {
+    background-color: #ddd;
+}
+
+#goals th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(34, 59, 170);
+    color: white;
+}
+</style>
+
+
+</head>
+<body>
+                
+
+<h2>Hi</h2>
+<h3> We noticed that you haven't come to didalens today</h3>
+<p>I'd like to remind you of your goals and it's only those that would be consistent that would have big wins in the end</p>
+<p>This is your score card for {{date_now}}</p>
+
+<p>{{user}} hasn't done</p>
+{% if bool_one is False %}
+<p>  <b>{{goal_one}}</b> today</p>
+{% endif %}
+
+{% if bool_two is False %}
+<p> <b>{{goal_two}}</b> today</p>
+{% endif %}
+{% if bool_three is False %}
+<p> <b>{{goal_three}}</b> today</p>
+{% endif %}
+
+<table id="goals">
+
+<tr>
+<th>Goal</th>
+<th>Time</th>
+<th>True or False</th>  
+</tr>
+
+<tr>
+<td>{{goal_one}}</td>
+
+<td>{{time_one}}</td>
+<td>{{bool_one}}</td>
+</tr>
+
+
+<tr>
+    <td>{{goal_two}}</td>
+    
+    <td>{{time_two}}</td>
+    <td>{{bool_two}}</td>
+    </tr>
+
+  
+<tr>
+    <td>{{goal_three}}</td>
+    
+    <td>{{time_three}}</td>
+    <td>{{bool_three}}</td>
+</tr>  
+
+
+
+
+</table>
+
+</div>
+
+<p>Please reply to this mail if you need further assistance</p>
+<p>We have also informed your accountability partner about this</p>
+<p>Kind regards</p>
+</p>Mitchel Inaju, Didalens</p>
+
+
+</body>
+</html>

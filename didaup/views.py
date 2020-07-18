@@ -50,9 +50,11 @@ def create_goal(request):
                 #goal.save()
             except :
                 pass            
-            
-            model_false=GoalModel(user=request.user, datetogoal=request.POST['goal'], is_true=False)
-            print(model_false.user)
+
+            details_list=GoalList.objects.filter(user=request.user)[0:1].get()
+
+            model_false=GoalModel(user=request.user, datetogoal=details_list, is_true=False)
+            model_false.save()
             return HttpResponseRedirect('/goals/secondgoal/')
 
     else:
@@ -79,14 +81,17 @@ def create_goal_two(request):
         if goal.is_valid():
             q.user=request.user
             q.goal=request.POST['goal']
-            model_false=GoalModel(user=request.user, datetogoal=request.POST['goal'], is_true=False)
 
             try:
-                model_false.save()
                 q.save()
                 #goal.save()
             except :
                pass
+            details_list=GoalList.objects.filter(user=request.user)[1:2].get()
+
+            model_false=GoalModel(user=request.user, datetogoal=details_list, is_true=False)
+            model_false.save()
+
                   
             return HttpResponseRedirect('/goals/thirdgoal/')
 
@@ -111,17 +116,22 @@ def create_goal_three(request):
         if goal.is_valid():
             q.user=request.user
             q.goal=request.POST['goal']
-            model_false=GoalModel(user=request.user, datetogoal=request.POST['goal'], is_true=False)
 
             try:
-                model_false.save()
                 q.save()
                 #goal.save()
             except :
                 pass
+
+            details_list=GoalList.objects.filter(user=request.user)[2:3].get()
+            model_false=GoalModel(user=request.user, datetogoal=details_list, is_true=False)
+            model_false.save()
+
+
             
             
             return HttpResponseRedirect('/goals/partner/')
+
 
     else:
         goal = GoalForm()
@@ -294,10 +304,13 @@ def goalfull(request):
         plain_message = strip_tags(html_message)
         from_email = 'mitchelinajuo@gmail.com'
         to = str(email_list[0])
+        print(type(email_list[0]), email_list[0])
 
         to_email = str(email_list[0])
 
         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+        mail.send_mail(subject, plain_message, from_email, ["mitchelinaju@yahoo.com"], html_message=html_message)
+        mail.send_mail(subject, plain_message, from_email, ["mitchelballzz@gmail.com"], html_message=html_message)
 
                 
         
@@ -414,7 +427,7 @@ def ask_a_friend(request, user_id):
 
 def thank_you(request):
 
-    return False
+    return render(request, 'thank_you.html')
 
 #This checks all the goals if they have been chacked for that day
 #if they have not been checked for that day then mark them false
@@ -440,7 +453,7 @@ def failed_goal_list(request):
             date_list.append(i.date)
         
         for date in date_list[-3:]:
-            if str(date) != datetime.now().date().strftime("%Y-%m-%d"):
+            if str(date) == datetime.now().date().strftime("%Y-%m-%d"):
                 print(current_user,date , datetime.now().date().strftime("%Y-%m-%d"))
                 
                 while j < 4:
@@ -480,7 +493,7 @@ def failed_goal_list(request):
                             now = datetime.now()
 
 
-
+                            """send goal report to accountability partner"""
                             subject = str(current_user) + ' needs your help, please check up'
                             html_message = render_to_string('help_mail_template.html', 
                             context={'goal_one':new_comb_list[0][0],'bool_one':new_comb_list[0][1], 'time_one':new_comb_list[0][2],
@@ -493,10 +506,31 @@ def failed_goal_list(request):
                             to = str(email_list[0])
                             to_email = str(email_list[0])
                             mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-                            mail.send_mail(subject, plain_message, from_email, [str('mitchelinaju@yahoo.com')], html_message=html_message)
-                            mail.send_mail(subject, plain_message, from_email, [str('mitchelballzz@gmail.com')], html_message=html_message)
+                            mail.send_mail(subject, plain_message, from_email, ["mitchelinaju@yahoo.com"], html_message=html_message)
+                            mail.send_mail(subject, plain_message, from_email, ["mitchelballzz@gmail.com"], html_message=html_message)
+
+
+                            """send goal report to user"""
+                            subject = "Dear " + str(current_user) + " i'm checking up on you"
+                            html_message = render_to_string('help_mail_template_user.html', 
+                            context={'goal_one':new_comb_list[0][0],'bool_one':new_comb_list[0][1], 'time_one':new_comb_list[0][2],
+                                    'goal_two':new_comb_list[1][0],'bool_two':new_comb_list[1][1], 'time_two':new_comb_list[1][2],
+                                    'goal_three':new_comb_list[2][0],'bool_three':new_comb_list[2][1], 'time_three':new_comb_list[2][2],
+                                    'date_now':now, 'user':current_user })
+
+                            plain_message = strip_tags(html_message)
+                            from_email = 'mitchelinajuo@gmail.com'
+                            to = str(current_user.email)
+                            
+                            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+                            mail.send_mail(subject, plain_message, from_email, ["mitchelinaju@yahoo.com"], html_message=html_message)
+                            mail.send_mail(subject, plain_message, from_email, ["mitchelballzz@gmail.com"], html_message=html_message)
+
+
                         except:
                             pass
+
+
                         
                         
                 if current_user not in users_to_send:
@@ -506,8 +540,28 @@ def failed_goal_list(request):
     print(users_to_send)
     
 
-        
+def make_goal_false(request):
+    show_goal= GoalList.objects.filter()
+    show_date=GoalModel.objects.filter()
+    partners=AccountabilityPartner.objects.filter()
+    users = CustomUser.objects.all()
 
+
+    for user in users:
+        j=0
+        for j in range(3):
+            details_list=GoalList.objects.filter(user=user)[j:j+1].get()
+
+            print(user,details_list)
+            b=GoalModel(user=user, datetogoal=details_list, is_true=False)
+            b.save()
+            print(user)
+
+            j += 1
+
+
+            
+             
 
 def send_test_email(request):
 
