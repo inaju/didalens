@@ -443,7 +443,7 @@ def ask_a_friend(request, user_id):
                     html_message = render_to_string('welcome_mail_accountability_partner.html')
                     plain_message = strip_tags(html_message)
                     from_email = 'mitchelinajuo@gmail.com'
-                    to = str(current_user.email)
+                    to = str(email)
                     
                     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
                     mail.send_mail(subject, plain_message, from_email, ["mitchelinaju@yahoo.com"], html_message=html_message)
