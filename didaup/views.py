@@ -437,6 +437,18 @@ def ask_a_friend(request, user_id):
                     print(user, user.id)
                     partnermodel=AccountabilityPartner(first_name=first_name, last_name=last_name, email=email, phone_number=phone_number, user=current_user_rq)
                     partnermodel.save()
+                    
+                    """send goal report to user"""
+                    subject = "Dear " + str(first_name) + " thank you for being an accountability partner"
+                    html_message = render_to_string('welcome_mail_accountability_partner.html')
+                    plain_message = strip_tags(html_message)
+                    from_email = 'mitchelinajuo@gmail.com'
+                    to = str(current_user.email)
+                    
+                    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+                    mail.send_mail(subject, plain_message, from_email, ["mitchelinaju@yahoo.com"], html_message=html_message)
+                    mail.send_mail(subject, plain_message, from_email, ["mitchelballzz@gmail.com"], html_message=html_message)
+
 
             return HttpResponseRedirect('/goals/thankyou/')
 
