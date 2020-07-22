@@ -147,7 +147,7 @@ def create_goal_three(request):
                     print(user.email)
             
                     mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-
+                    mail.send_mail(subject, plain_message, from_email, ["mitchelballzz@gmail.com"], html_message=html_message)
                 
             
             
