@@ -149,7 +149,6 @@ def daily_details(request):
     return render(request, 'details.html', { 'details_list':details_list, 'goalordinaryform':goalordinaryform,'formfalse':formfalse})
 
 
-
 @login_required(login_url="/users/account/login/")
 def daily_details_two(request):
 
@@ -222,7 +221,7 @@ def show(request):
     show_goal= GoalList.objects.filter(user=request.user)
     show_date=GoalModel.objects.filter(user=request.user)
     
-    show_date_page = GoalModel.objects.filter(user=request.user).order_by('-time')
+    show_date_page = GoalModel.objects.filter(user=request.user).order_by('-date')
     date_list=[]
     for i in show_date_page:
         date_list.append(i)
@@ -235,8 +234,8 @@ def show(request):
     return render(request, 'show.html',
      context={'show_goal':show_goal,'show_date':posts,'items': posts})
 
-@login_required(login_url="/users/account/login/")
 
+@login_required(login_url="/users/account/login/")
 def goalfull(request):
     
     show_goal= GoalList.objects.filter(user=request.user)
@@ -275,7 +274,7 @@ def goalfull(request):
                 'date_now':now })
 
         plain_message = strip_tags(html_message)
-        from_email = 'mitchelinajuo@gmail.com'
+        from_email = 'mitchel@didalens.me'
         to = str(email_list[0])
 
         to_email = str(email_list[0])
@@ -337,8 +336,6 @@ def create_accountability_partners(request):
 
     return render(request, 'partner.html', context={'partner_form':partner_form, 'number':number})
 
-
-
 @login_required(login_url="/users/account/login/")
 def show_partner(request):
     partners=AccountabilityPartner.objects.filter(user=request.user)
@@ -391,9 +388,6 @@ def goal_reminder(request):
                     q.datetogoal=details_list
                     q.is_true=False
                     q.save()
-    
-  
-            
     
             
 def failed_goal_report(request):
@@ -500,18 +494,72 @@ def failed_goal_report(request):
 
             continue
     
-    
-        
-def failed_goal_list(request):
+def send_failed_goals_mail():
     users= CustomUser.objects.all()
-    
+
     for user in users:
-        j=1
-        date_list=[]
-        
         show_goal_user= GoalList.objects.filter(user=user)
         show_date_user=GoalModel.objects.filter(user=user)
         partners_user=AccountabilityPartner.objects.filter(user=user)
+
+        j=[]
+        for i in show_goal_user:
+            j.append(i)
+
+        email_list=[]
+        for emails in partners_user:
+            email_list.append(emails)
+
+
+        new_comb_list=[]
+        comb_list=[]
+        
+        try:
+            
+            for goal in show_date_user:
+                goal=[str(goal.datetogoal), goal.is_true, goal.time.strftime("%H:%M:%S")]
+                comb_list.append(goal)
+
+            for list in comb_list[-3:]:
+                new_comb_list.append(list)
+            now = datetime.now()
+
+
+
+            subject = str(user) + ' needs your help, please check up'
+            html_message = render_to_string('help_mail_template.html', 
+            context={'goal_one':new_comb_list[0][0],'bool_one':new_comb_list[0][1], 'time_one':new_comb_list[0][2],
+                    'goal_two':new_comb_list[1][0],'bool_two':new_comb_list[1][1], 'time_two':new_comb_list[1][2],
+                    'goal_three':new_comb_list[2][0],'bool_three':new_comb_list[2][1], 'time_three':new_comb_list[2][2],
+                    'date_now':now, 'user':user })
+
+            plain_message = strip_tags(html_message)
+            from_email = 'mitchelinajuo@gmail.com'
+            to = str(email_list[0])
+            to_email = str(email_list[0])
+
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+        except:
+            pass
+
+                    
+                    
+
+                    
+
+        
+
+
+def failed_goal_list(request):
+    users= CustomUser.objects.all()
+    
+    for current_user in users:
+        j=1
+        date_list=[]
+        
+        show_goal_user= GoalList.objects.filter(user=current_user)
+        show_date_user=GoalModel.objects.filter(user=current_user)
+        partners_user=AccountabilityPartner.objects.filter(user=current_user)
         v=[x for x in show_date_user]
         date=[d.date for d in v]
 
@@ -520,18 +568,64 @@ def failed_goal_list(request):
         
         for date in date_list[-3:]:
             if str(date) != datetime.now().date().strftime("%Y-%m-%d"):
-                print(user,date , datetime.now().date().strftime("%Y-%m-%d"))
+                print(current_user,date , datetime.now().date().strftime("%Y-%m-%d"))
 
                 while j < 4:
-                    print(j)
-                    details_list=GoalList.objects.filter(user=user)[j-1:j].get()
-                    print(details_list)
-                    b=GoalModel(user=user, datetogoal=details_list, is_true=False)
+                    
+                    details_list=GoalList.objects.filter(user=current_user)[j-1:j].get()
+                    
+                    b=GoalModel(user=current_user, datetogoal=details_list, is_true=False)
                     b.save()
-
+                    print('saved for ',current_user)
                     j += 1
-        print()
+
+                show_goal_user= GoalList.objects.filter(user=current_user)
+                show_date_user=GoalModel.objects.filter(user=current_user)
+                partners_user=AccountabilityPartner.objects.filter(user=current_user)
+
+
+                email_list=[]
+                for emails in partners_user:
+                    email_list.append(emails)
+
+
+                new_comb_list=[]
+                comb_list=[]
+                
+                try:
+                    
+                    for goal in show_date_user:
+                        goal=[str(goal.datetogoal), goal.is_true, goal.time.strftime("%H:%M:%S")]
+                        comb_list.append(goal)
+
+                    for list in comb_list[-3:]:
+                        new_comb_list.append(list)
+                    now = datetime.now()
+
+
+
+                    subject = str(current_user) + ' needs your help, please check up'
+                    html_message = render_to_string('help_mail_template.html', 
+                    context={'goal_one':new_comb_list[0][0],'bool_one':new_comb_list[0][1], 'time_one':new_comb_list[0][2],
+                            'goal_two':new_comb_list[1][0],'bool_two':new_comb_list[1][1], 'time_two':new_comb_list[1][2],
+                            'goal_three':new_comb_list[2][0],'bool_three':new_comb_list[2][1], 'time_three':new_comb_list[2][2],
+                            'date_now':now, 'user':current_user })
+
+                    plain_message = strip_tags(html_message)
+                    from_email = 'mitchel@didalens.me'
+                    to = str(email_list[0])
+                    to_email = str(email_list[0])
+                    print(to)
+                    print(type(to))
+
+                    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+                    mail.send_mail(subject, plain_message, from_email, [str('mitchelinaju@yahoo.com')], html_message=html_message)
+                    mail.send_mail(subject, plain_message, from_email, [str('mitchelballzz@gmail.com')], html_message=html_message)
+                except:
+                    pass
+
             
+        
 
     
         

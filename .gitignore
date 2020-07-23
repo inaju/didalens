@@ -9,4 +9,4 @@ myOutFile.txt
 .sqlite3
 .env
 secrets.py
-secret_folder
+secrets_folder
