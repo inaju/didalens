@@ -19,7 +19,18 @@ from django.utils import timezone
 from selenium import webdriver
 
 
+def send_test_email(request, message, subject):
+    
+    send_mail(
+    str(subject),
+    str(message),
+    'mitchelinajuo@gmail.com',
+    ['mitchelinajuo@gmail.com'],
+    fail_silently=False,
+    )
 
+
+    return HttpResponse('sent mail --done')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 
 
 def failed_goal_email(request):
@@ -163,6 +174,8 @@ def create_goal_three(request):
                 failed_goal_email(request)
             except Exception as e:
                 print(e)
+
+                send_test_email(request, e, subject="error email")
                 
                 return HttpResponseRedirect('/goals/partner/')
 
@@ -626,15 +639,3 @@ def make_goal_false(request):
             
              
 
-def send_test_email(request):
-
-    send_mail(
-    'Subject here',
-    'Here is the message.',
-    'mitchelinajuo@gmail.com',
-    ['mitchelinajuo@gmail.com'],
-    fail_silently=False,
-    )
-
-
-    return HttpResponse('sent mail --done')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
