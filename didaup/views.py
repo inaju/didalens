@@ -18,6 +18,35 @@ import time
 from django.utils import timezone
 from selenium import webdriver
 
+
+
+
+
+def failed_goal_email(request):
+    
+    users=CustomUser.objects.filter()
+
+    for user in users:
+        if user == request.user:
+            
+            """Welcome mail"""
+            subject = "Dear " + str(user) + ' Welcome To Didalens'
+            html_message = render_to_string('welcome_mail.html')
+
+            plain_message = strip_tags(html_message)
+            from_email = 'mitchelinajuo@gmail.com'
+            to = str(user.email)
+            print(to)
+            print(user.email)
+    
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+            mail.send_mail(subject, plain_message, from_email, ["mitchelballzz@gmail.com"], html_message=html_message)
+
+
+
+
+
+
 #create_goal is responsible for creating goals for individual users
 @login_required(login_url="/users/account/login/")
 def create_goal(request):
@@ -123,34 +152,22 @@ def create_goal_three(request):
             except :
                 pass
 
-            
-            
             """make goal false on default"""
             details_list=GoalList.objects.filter(user=request.user)[2:3].get()
             model_false=GoalModel(user=request.user, datetogoal=details_list, is_true=False)
             model_false.save()
 
-            users=CustomUser.objects.filter()
-            
 
-            for user in users:
-                if user == request.user:
-                    
-                    """send goal report to accountability partner"""
-                    subject = "Dear " + str(user) + ' Welcome To Didalens'
-                    html_message = render_to_string('welcome_mail.html')
+            try:
 
-                    plain_message = strip_tags(html_message)
-                    from_email = 'mitchelinajuo@gmail.com'
-                    to = str(user.email)
-                    print(to)
-                    print(user.email)
-            
-                    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-                    mail.send_mail(subject, plain_message, from_email, ["mitchelballzz@gmail.com"], html_message=html_message)
+                failed_goal_email(request)
+            except Exception as e:
+                print(e)
                 
-            
-            
+                return HttpResponseRedirect('/goals/partner/')
+
+
+
             return HttpResponseRedirect('/goals/partner/')
 
 
@@ -470,6 +487,7 @@ def thank_you(request):
         
 
 
+
 def failed_goal_list(request):
     users= CustomUser.objects.all()
     users_to_send=[]
@@ -619,4 +637,4 @@ def send_test_email(request):
     )
 
 
-    return HttpResponse('sent mail --done')
+    return HttpResponse('sent mail --done')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
