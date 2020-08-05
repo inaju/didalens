@@ -11,9 +11,6 @@ import django_heroku
 import dj_database_url 
 from boto.s3.connection import S3Connection
 
-s3 = S3Connection(os.environ['SENDGRID_PASSWORD'])
-
-EMAIL_HOST_PASSWORD =os.getenv('SENDGRID_PASSWORD')
 EMAIL_HOST_USER = 'apikey'  
 SECRET_KEY = "l$va&v%#5dfku@z0%j$2s0un9#4pju*uq@zv*z3t0ioo2-g(67"
 
