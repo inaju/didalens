@@ -14,19 +14,17 @@ from boto.s3.connection import S3Connection
 try:
     s3 = S3Connection(os.environ['SENDGRID_PASSWORD'], os.environ['DATABASE_URL'], os.environ['KEY'])
     EMAIL_HOST_PASSWORD =os.getenv('SENDGRID_PASSWORD')
-    SECRET_KEY = os.getenv('KEY')
-    print(os.getenv('KEY'))
-    print(os.getenv('SENDGRID_PASSWORD'))
     EMAIL_HOST_USER = 'apikey'
+    
 except Exception as e:
     print(e)
    
     from secrets_folder import secrets
     EMAIL_HOST_PASSWORD = secrets.SENDGRID_PASSWORD
-    SECRET_KEY = secrets.KEY
     EMAIL_HOST_USER = 'apikey'
 
     
+    SECRET_KEY = "l$va&v%#5dfku@z0%j$2s0un9#4pju*uq@zv*z3t0ioo2-g(67"
 
 
 
