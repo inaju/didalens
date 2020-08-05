@@ -12,14 +12,16 @@ import dj_database_url
 from boto.s3.connection import S3Connection
 
 try:
-    s3 = S3Connection(os.environ['AMASON_PASSWORD'], os.environ['AMAZON_USER'],  os.environ['DATABASE_URL'], os.environ['KEY'] )
-    EMAIL_HOST_USER =os.getenv('AMAZON_USER')
-    EMAIL_HOST_PASSWORD =os.getenv('AMASON_PASSWORD')
+    s3 = S3Connection(os.environ['SENDGRID_PASSWORD'],os.environ['DATABASE_URL'], os.environ['KEY'] )
+    EMAIL_HOST_USER = 'apikey'
+    EMAIL_HOST_PASSWORD =os.getenv('SENDGRID_PASSWORD')
     SECRET_KEY = os.getenv('KEY')
+    
 except:
+    
     from secrets_folder.secrets import *
-    EMAIL_HOST_USER=AMAZON_USER
-    EMAIL_HOST_PASSWORD=AMASON_PASSWORD
+    EMAIL_HOST_USER='apikey'
+    EMAIL_HOST_PASSWORD=SENDGRID_PASSWORD
     SECRET_KEY = KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -94,7 +96,7 @@ WSGI_APPLICATION = 'dida.wsgi.application'
 DATABASES = {
     'default': 
     {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'dida',
+    'NAME': 'didalens',
     'USER': 'adminmaster',
     'PASSWORD': 'adminmaster',
     'HOST': 'localhost',
@@ -148,7 +150,7 @@ LOGIN_REDIRECT_URL='/goals/'
 
 
 # Amazon ses
-EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
