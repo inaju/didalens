@@ -12,10 +12,9 @@ import dj_database_url
 from boto.s3.connection import S3Connection
 
 
-s3 = S3Connection('SENDGRID_PASSWORD','KEY')
+s3 = S3Connection(os.environ['SENDGRID_PASSWORD'], os.environ['KEY'] )
 SECRET_KEY = os.getenv('KEY')
-EMAIL_HOST_USER = 'apikey' 
-EMAIL_HOST_PASSWORD =SENDGRID_PASSWORD
+EMAIL_HOST_USER = 'apikey'  
 SECRET_KEY = os.getenv('KEY')
 
 
