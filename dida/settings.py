@@ -12,17 +12,23 @@ import dj_database_url
 from boto.s3.connection import S3Connection
 
 try:
-    s3 = S3Connection(os.environ['SENDGRID_PASSWORD'] ,os.environ['DATABASE_URL'], os.environ['KEY'] )
-    EMAIL_HOST_USER = 'apikey'
+    s3 = S3Connection(os.environ['SENDGRID_PASSWORD'], os.environ['DATABASE_URL'], os.environ['KEY'])
     EMAIL_HOST_PASSWORD =os.getenv('SENDGRID_PASSWORD')
     SECRET_KEY = os.getenv('KEY')
+    EMAIL_HOST_USER = 'apikey'
+except Exception as e:
+    print(e)
+    pass
+    ''' 
+    from secrets_folder import secrets
+    EMAIL_HOST_PASSWORD = secrets.SENDGRID_PASSWORD
+    SECRET_KEY = secrets.KEY
+    EMAIL_HOST_USER = 'apikey' '''
+
     
-except:
-    
-    from secrets_folder.secrets import *
-    EMAIL_HOST_USER='apikey'
-    EMAIL_HOST_PASSWORD=SENDGRID_PASSWORD
-    SECRET_KEY = KEY
+
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -96,13 +102,23 @@ WSGI_APPLICATION = 'dida.wsgi.application'
 DATABASES = {
     'default': 
     {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'dida',
+    'NAME': 'didalens',
     'USER': 'adminmaster',
     'PASSWORD': 'adminmaster',
     'HOST': 'localhost',
     'PORT': '',
     }
     }
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db',
+    }
+}
+
+'''
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -147,15 +163,22 @@ LOGIN_REDIRECT_URL='/goals/'
 #EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 #EMAIL_FILE_PATH=os.path.join(BASE_DIR, 'sent_emails')
 
-
+'''
 
 # Amazon ses
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+'''
+
+
+#sendgrid
+EMAIL_HOST ='smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-'''check the upperpart of the file for the remining credentials'''
 
+'''check the upperpart of the file for the remining credentials'''
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
