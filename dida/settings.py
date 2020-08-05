@@ -12,7 +12,7 @@ import dj_database_url
 from boto.s3.connection import S3Connection
 
 try:
-    s3 = S3Connection(os.environ['SENDGRID_PASSWORD'],os.environ['DATABASE_URL'], os.environ['KEY'] )
+    s3 = S3Connection(os.environ['SENDGRID_PASSWORD'] ,os.environ['DATABASE_URL'], os.environ['KEY'] )
     EMAIL_HOST_USER = 'apikey'
     EMAIL_HOST_PASSWORD =os.getenv('SENDGRID_PASSWORD')
     SECRET_KEY = os.getenv('KEY')
@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'dida.wsgi.application'
 DATABASES = {
     'default': 
     {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'didalens',
+    'NAME': 'dida',
     'USER': 'adminmaster',
     'PASSWORD': 'adminmaster',
     'HOST': 'localhost',
