@@ -28,5 +28,8 @@ urlpatterns = [
     path('aboutdidalens/', views.about_didalens, name='fake_email'),
     path('detailserror/', views.details_error, name='details_error'),
     path('makegoalfalse/', views.make_goal_false, name='make_goal_false'),
+    path('settings/', views.settings, name='settings'),
+    path('edit_goals/', views.edit_goals, name='edit_goals'),
+    path('update_goals/<int:id>/', views.update_goals, name='edit_goals'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

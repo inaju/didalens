@@ -1,0 +1,16 @@
+    <center>
+    {% extends 'stone.html' %}
+
+    {% block title %}Didalens Home{% endblock  %}
+
+    {% block content %}
+    
+    {% for goal in goals %}
+
+    <form method="POST" action="/goals/update_goals/{{goal.id}}/">  
+    {% csrf_token %}  
+
+    <p>{{goal}} <input type='submit' value='edit'></input></p>
+    </form>
+    {% endfor %}
+{% endblock %}

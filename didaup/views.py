@@ -34,6 +34,7 @@ def create_goal(request):
     q=GoalList(user=request.user)
     if request.method == 'POST' and request.user.is_authenticated:
         goal = GoalForm(request.POST)
+        print(request.POST)
 
         #if the form is valid...continue
         # save Goallist.user to be = the connected user
@@ -620,3 +621,46 @@ def send_test_email(request):
 
 
     return HttpResponse('sent mail --done')
+
+
+def settings(request):
+    return render(request, 'settings.html')
+
+def edit_goals(request):
+    show_goal= GoalList.objects.filter(user=request.user)
+    
+    goals_list=[]
+    for goals in show_goal:
+        print(goals, goals.id)
+        goals_list.append(goals)
+    print(request.POST)
+        
+    print('done')
+    print()
+    print()
+    
+    return render(request, 'edit_goal.html', context={'goal_id': goals.id, 'goals': goals_list})
+
+
+
+def update_goals(request, id): 
+    show_goal = GoalList.objects.get(id=id)  
+    
+    if request.method == 'POST':
+        form = GoalForm(request.POST, instance=show_goal)
+
+        print(form)
+        if form.is_valid():
+            print('form is valid')
+            print(request.POST)
+            form.goal = request.POST['goal']
+            print(form.goal)
+            form.save()
+           
+            return HttpResponseRedirect("/goals/show") 
+        
+            
+      
+
+        
+    return render(request, 'update_goals.html', context={'form': form, 'show_goal': show_goal})

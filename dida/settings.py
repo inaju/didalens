@@ -11,13 +11,20 @@ import django_heroku
 import dj_database_url 
 from boto.s3.connection import S3Connection
 
+try:
+    s3 = S3Connection(os.environ['SENDGRID_PASSWORD'], os.environ['KEY'] )
+    SECRET_KEY = os.getenv('KEY')
+    EMAIL_HOST_USER = 'apikey'  
+    EMAIL_HOST_PASSWORD =os.getenv('SENDGRID_PASSWORD')
 
-s3 = S3Connection(os.environ['SENDGRID_PASSWORD'], os.environ['KEY'] )
-SECRET_KEY = os.getenv('KEY')
-EMAIL_HOST_USER = 'apikey'  
-EMAIL_HOST_PASSWORD =os.getenv('SENDGRID_PASSWORD')
+    SECRET_KEY = os.getenv('KEY')
+except:
+    from secrets_folder import secrets
+    SECRET_KEY = secrets.KEY
+    EMAIL_HOST_USER = 'apikey'  
+    EMAIL_HOST_PASSWORD =secrets.SENDGRID_PASSWORD
 
-SECRET_KEY = os.getenv('KEY')
+
 
 
 
@@ -36,7 +43,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['didalens.herokuapp.com']
 
